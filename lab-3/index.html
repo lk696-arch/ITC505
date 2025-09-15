@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ITC-505 • Lab 3: Serving Fonts</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google Fonts method: load an unusual font directly from their CDN -->
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #111;
+      color: #eee;
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+    }
+    h1, h2, .big {
+      font-family: 'Creepster', cursive; /* use the Google font here */
+      color: #ff4d6d;
+    }
+    .big {
+      font-size: 3rem;
+      margin-top: 1rem;
+    }
+    .card {
+      background-color: #222;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+    code {
+      background: #333;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      color: #a5d6ff;
+    }
+    footer {
+      margin-top: 2rem;
+      border-top: 1px solid #444;
+      padding-top: 1rem;
+      font-size: 0.9rem;
+      color: #bbb;
+    }
+  </style>
+</head>
+<body>
+  <h1>Lab 3: Serving Fonts (Google Fonts Method)</h1>
+
+  <div class="card">
+    <h2>What I did (in my own words)</h2>
+    <p>
+      Instead of hosting font files myself, I used <strong>Google Fonts</strong> to serve the font.
+      I added a <code>&lt;link&gt;</code> tag in the <code>&lt;head&gt;</code> of my HTML that points
+      to Google’s stylesheet. This stylesheet tells the browser where to download the font file from
+      Google’s servers. Then, in my CSS, I used <code>font-family: 'Creepster'</code> to apply it to
+      headings and large text. The browser fetches the font, caches it, and displays this page using
+      the custom font.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Font Demo</h2>
+    <p class="big">This line should look spooky and unusual!</p>
+  </div>
+
+  <footer>
+    <p>Last updated:
+      <span id="lastModified"></span>
+    </p>
+  </footer>
+  <script type="text/javascript">
+    var x = document.lastModified;
+    document.getElementById('lastModified').textContent = x;
+  </script>
+</body>
+</html>
