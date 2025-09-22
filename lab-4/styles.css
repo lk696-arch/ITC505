@@ -1,0 +1,164 @@
+/* ------------------------------
+   Lab 4 Styles — Presentational CSS
+   Focus: readability, hierarchy, accessible contrast, and clean layout.
+--------------------------------- */
+
+/* Theme tokens */
+:root {
+  --bg: #fafafa;
+  --text: #222;            /* strong neutral for body text */
+  --muted: #4b5563;        /* subdued gray for meta text */
+  --card: #ffffff;
+
+  --teal-700: #0f766e;     /* accessible accent for headings/links */
+  --teal-800: #115e59;
+  --teal-900: #134e4a;
+
+  --border: #e5e7eb;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+
+  --radius: 14px;
+  --container: 70ch;       /* comfortable line length */
+
+  --shadow-1: 0 1px 2px rgba(0,0,0,.05), 0 4px 12px rgba(0,0,0,.06);
+}
+
+/* Global resets / base */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  color: var(--text);
+  background: linear-gradient(180deg, #fdfdfd, #f7f9fa 45%, #f6f6f6);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+  line-height: 1.7;
+  font-size: 1rem; /* 16px */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Typography scale — fluid on laptops and larger */
+h1, h2, h3 {
+  font-family: "Merriweather", Georgia, Cambria, "Times New Roman", Times, serif;
+  line-height: 1.25;
+  margin: var(--space-8) 0 var(--space-4);
+  text-wrap: balance;
+  hanging-punctuation: first;
+  color: var(--teal-800);
+}
+
+h1 { font-weight: 900; font-size: clamp(2rem, 3vw, 2.75rem); }
+h2 { font-weight: 900; font-size: clamp(1.5rem, 2.2vw, 2rem); }
+h3 { font-weight: 700; font-size: clamp(1.25rem, 1.6vw, 1.5rem); }
+
+p { margin: 0 0 var(--space-4); color: var(--text); }
+p .lead { font-size: 1.125rem; }
+
+ul, ol { margin: 0 0 var(--space-4) var(--space-6); padding: 0; }
+li { margin-bottom: var(--space-2); }
+
+cite, em { font-style: italic; }
+
+/* Links */
+a {
+  color: var(--teal-700);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+}
+a:hover { color: var(--teal-900); }
+a:focus-visible {
+  outline: 3px solid var(--teal-700);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Layout */
+.wrap {
+  max-width: var(--container);
+  padding: 0 var(--space-5);
+  margin: 0 auto;
+}
+
+/* Header */
+.site-header {
+  background: linear-gradient(135deg, var(--teal-800), var(--teal-900));
+  color: white;
+  border-bottom: 4px solid #0b3f3b;
+  box-shadow: var(--shadow-1);
+}
+.site-header .wrap { padding: var(--space-12) var(--space-5) var(--space-8); }
+
+.site-title { margin: 0 0 var(--space-2); color: #ecfeff; }
+.site-kicker { margin: 0 0 var(--space-4); color: #d2f4f1; }
+
+/* Nav */
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-4);
+}
+.site-nav a {
+  display: inline-block;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.18);
+  padding: var(--space-2) var(--space-4);
+  border-radius: 999px;
+  color: #e6fffb;
+  text-decoration: none;
+  font-weight: 600;
+}
+.site-nav a:hover { background: rgba(255,255,255,.16); color: #ffffff; }
+
+/* Main content */
+#content { padding: var(--space-8) 0 var(--space-12); }
+
+section + section { margin-top: var(--space-8); }
+
+/* Cards for dense lists (optional subtle framing) */
+section#references, section#bibliography {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-1);
+}
+
+/* Addendum styling */
+#addendum {
+  margin-top: var(--space-12);
+  padding-top: var(--space-8);
+  border-top: 4px solid var(--border);
+}
+#addendum h3 { margin-top: var(--space-6); }
+
+/* Footer (required script is in HTML) */
+.site-footer {
+  margin-top: var(--space-12);
+  padding: var(--space-6);
+  text-align: center;
+  background: #0b3f3b;
+  color: white;
+  border-top: 4px solid #072a28;
+}
+
+/* Misc niceties */
+::selection { background: #ccfbf1; color: #064e3b; }
+img { max-width: 100%; height: auto; border-radius: 8px; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation: none !important; transition: none !important; }
+}
