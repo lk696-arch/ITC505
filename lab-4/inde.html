@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Public Domain Review — Styled (Lab 4)</title>
+  <meta name="description" content="Styled version of the Lab 2 essay with an addendum explaining presentational CSS choices." />
+
+  <!-- Performance-friendly font loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Heading: Merriweather (serif), Body/UI: Inter (sans) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+
+  <!-- External stylesheet (Lab 4 requirement) -->
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <header class="site-header" role="banner">
+    <div class="wrap">
+      <h1 class="site-title">The Public Domain Review</h1>
+      <p class="site-kicker"><em>From Wikipedia, the free encyclopedia</em></p>
+      <nav class="site-nav" aria-label="Page Sections">
+        <a href="#overview">Overview</a>
+        <a href="#contributors">Contributors</a>
+        <a href="#funding">Funding</a>
+        <a href="#bibliography">Bibliography</a>
+        <a href="#references">References</a>
+        <a href="#external-links">External Links</a>
+        <a href="#addendum">Addendum</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content" class="wrap" role="main">
+    <!-- ARTICLE 1: Paper -->
+    <article aria-labelledby="overview">
+      <section id="overview">
+        <h2>Overview</h2>
+        <p>
+          The Public Domain Review is an online journal showcasing works which have entered the public domain. 
+          It was co-founded by Jonathan Gray and Adam Green. It was launched on January 1, 2011, to coincide 
+          with Public Domain Day.
+        </p>
+        <p>
+          The Review aims to raise awareness of the public domain by promoting public domain works from across 
+          the web, including from Europeana, the Internet Archive, and Wikimedia Commons. As well as curated 
+          collections of public domain images, texts, and films, it features longer essays from contemporary 
+          writers, scholars, and public intellectuals.
+        </p>
+        <p>
+          The Guardian reviewed it as “magnificent … a model of digital curation,” an interview in Vice 
+          labelled it “beautifully curated,” and The A.V. Club described it as “endlessly and deeply absorbing.”
+        </p>
+      </section>
+
+      <section id="contributors">
+        <h2>Contributors and Content</h2>
+        <p>
+          Contributors of articles have included Julian Barnes, Frank Delaney, Jack Zipes, Richard Hamblyn, 
+          Philipp Blom, and Arika Okrent. In addition to the thematic essays, a monthly “Curator’s Choice” 
+          series highlights professional curators’ essays about material from their cultural institutions.
+        </p>
+        <p>
+          The Review published its first print anthology in late 2014, a collection of 34 essays published 
+          online during 2011–13. It was reviewed as “an incredible collection of esoterica” by <cite>The Paris 
+          Review</cite>, and featured as one of <cite>Wired</cite>’s best science books of 2014. A second volume was published in 2015.
+        </p>
+      </section>
+
+      <section id="funding">
+        <h2>Funding</h2>
+        <p>
+          It was originally launched with seed funding from the Open Knowledge Foundation and the Shuttleworth 
+          Foundation before becoming an independent community interest company supported by its readers.
+        </p>
+      </section>
+
+      <section id="bibliography">
+        <h2>Bibliography</h2>
+        <ul>
+          <li>
+            Adam Green, ed. (2014). 
+            <em>The Public Domain Review: Selected Essays: The First Three Years, 2011–2013</em>. 
+            Cambridge, UK: PDR Press. ISSN 2056-953X. OCLC 903052212.
+          </li>
+          <li>
+            Adam Green, ed. (2015). 
+            <em>The Public Domain Review: Selected Essays, Vol. II</em>. 
+            Cambridge, UK: PDR Press. ISSN 2056-953X.
+          </li>
+        </ul>
+      </section>
+
+      <section id="references">
+        <h2>References</h2>
+        <ol>
+          <li>“Using Material from Our Site”. The Public Domain Review.</li>
+          <li>“Blog: 6 questions with… The Public Domain Review”. PopTech. August 24, 2011.</li>
+          <li>“The Public Domain Review is launched!”. Jonathangray.org. January 1, 2011.</li>
+          <li>Baddeley, Anna (2013). “The Public Domain Review demonstrates the power of digital curation”. <em>The Guardian</em>.</li>
+          <li>Ricci, Virginia (2013). “The Public Domain Review Shows You History’s Best Out-of-Copyright Art”.</li>
+          <li>Browning, Laura M. (2014). “A photo book, a documentary about Elaine Stritch, and the public domain”. <em>The A.V. Club</em>.</li>
+        </ol>
+      </section>
+
+      <section id="external-links">
+        <h2>External Links</h2>
+        <ul>
+          <li><a href="https://publicdomainreview.org">The Public Domain Review (official website)</a></li>
+        </ul>
+      </section>
+    </article>
+
+    <!-- ARTICLE 2: Addendum -->
+    <article id="addendum" aria-labelledby="addendum-heading">
+      <h2 id="addendum-heading">Addendum: My Presentational CSS Choices</h2>
+
+      <h3>Font choices</h3>
+      <p>
+        I paired a readable sans-serif for body text with a classic serif for headings to create a clear hierarchy and improve long-form readability.
+        Body/UI uses <strong>Inter</strong> (with a broad character set and good hinting); headings use <strong>Merriweather</strong> for contrast.
+        Both load from Google Fonts with <code>display=swap</code> to avoid invisible text.
+      </p>
+
+      <h3>Type scale & sizes</h3>
+      <ul>
+        <li>Main text is set at <code>1rem</code> (16px base) with a comfortable <code>1.7</code> line-height.</li>
+        <li>Headings use a responsive clamp scale (e.g., <code>h1: clamp(2rem, 3vw, 2.75rem)</code>) so they look good on laptop screens and above.</li>
+        <li>Maximum line length is limited via a content width to ~70–80 characters for readability.</li>
+      </ul>
+
+      <h3>Color choices</h3>
+      <p>
+        I used a teal accent (<code>--teal-700</code>) for headings and interactive states, with neutral grays for body text and backgrounds. 
+        Contrast ratios meet or exceed WCAG AA for text on the light background.
+      </p>
+
+      <h3>Spacing, margins, and padding</h3>
+      <ul>
+        <li>Global rhythm via <code>--space-*</code> tokens; consistent top/bottom margins on headings and paragraphs.</li>
+        <li>Generous page padding and a centered content column improve scannability on laptop-sized viewports.</li>
+        <li>Lists and references get slightly tighter spacing to keep dense sections compact but legible.</li>
+      </ul>
+
+      <h3>Modern CSS & platform diversity</h3>
+      <ul>
+        <li>Custom properties for theme tokens; <code>clamp()</code> for fluid type; <code>:focus-visible</code> for accessible focus rings.</li>
+        <li>Reduced motion respected via <code>@media (prefers-reduced-motion)</code>.</li>
+        <li>System-font fallbacks ensure acceptable rendering if web fonts fail.</li>
+      </ul>
+
+      <h3 id="html-abuse">HTML abuse</h3>
+      <p>
+        I removed all presentational CSS from the HTML (Lab 2 used an inline <code>&lt;style&gt;</code> block). Styles now live in <code>styles.css</code>.
+        The title remains a semantic <code>&lt;h1&gt;</code>, and section headings are <code>&lt;h2&gt;</code>. No heading levels are chosen for “how they look.”
+        Spacing is controlled with margins in CSS (no <code>&lt;br&gt;</code> for layout).
+      </p>
+    </article>
+  </main>
+
+  <!-- REQUIRED FOOTER (as provided in the assignment) -->
+  <footer class="site-footer">
+    <p>Last updated: <span id="lastModified"></span></p>
+  </footer>
+  <script type="text/javascript">
+    var x = document.lastModified;
+    document.getElementById('lastModified').textContent = x;
+  </script>
+</body>
+</html>
