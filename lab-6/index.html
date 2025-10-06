@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ITC505 · Lab 6 — Do Something!</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JS Logo" />
+      <h1>Lab 6 — Holy Grail + Interactive JS</h1>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="sidebar" aria-label="Primary">
+      <h2>Menu</h2>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">Assignments</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+
+    <main class="content">
+      <h2>Interactive: Bubble Sort Playground</h2>
+      <p>Enter a list of integers (comma-separated), then sort them. You can also watch the algorithm step-by-step.</p>
+
+      <form id="sortForm">
+        <label for="numbers">Numbers</label>
+        <input id="numbers" name="numbers" type="text" placeholder="e.g. 5, 3, 8, 1, 2" required />
+        <div class="controls">
+          <button type="submit" id="sortAsc">Sort Asc</button>
+          <button type="button" id="sortDesc">Sort Desc</button>
+          <button type="button" id="stepBtn">Show Steps</button>
+          <button type="reset" id="resetBtn">Reset</button>
+        </div>
+      </form>
+
+      <section class="results">
+        <h3>Result</h3>
+        <output id="result">—</output>
+      </section>
+
+      <section class="steps">
+        <h3>Steps</h3>
+        <ol id="stepsList"></ol>
+      </section>
+
+      <section class="addendum">
+        <h2>Addendum</h2>
+        <p><strong>Problem solved:</strong> Implemented Bubble Sort on a user-provided list of integers, with options to sort ascending/descending and to display algorithm steps.</p>
+        <p><strong>How it was solved:</strong> The UI captures a comma-separated string, parses it into an array of integers, and passes it to a reusable <code>bubbleSort</code> function located in <code>script.js</code>. Event listeners on buttons trigger sorting or step-by-step tracing, updating the DOM with results and step states.</p>
+        <p><strong>Difficulties & solutions:</strong> 
+          Parsing invalid input (e.g., extra spaces or empty items) was handled by trimming, filtering blanks, and validating that all tokens are finite numbers. To avoid blocking the UI on large inputs when tracing steps, we limit displayed states and summarize when step counts are large.</p>
+      </section>
+    </main>
+
+    <aside class="ad">
+      <a href="https://www.amazon.com/dp/0132350882" target="_blank" rel="noopener noreferrer" aria-label="Ad: Clean Code on Amazon">
+        <img src="https://images-na.ssl-images-amazon.com/images/I/41SH-SvWPxL._SX379_BO1,204,203,200_.jpg" alt="Clean Code book cover" />
+      </a>
+      <p class="ad-caption">Sponsored: Clean Code (opens Amazon in new tab)</p>
+    </aside>
+  </div>
+
+  <footer>
+    <p>Last updated: 
+      <span id="lastModified"></span>
+    </p>
+    <p class="tiny">ITC505 · Holy Grail layout via CSS Grid. JavaScript in a separate file (<code>script.js</code>).</p>
+  </footer>
+
+  <script src="script.js" defer></script>
+  <script type="text/javascript">
+    var x = document.lastModified;
+    document.getElementById('lastModified').textContent = x;
+  </script>
+</body>
+</html>
