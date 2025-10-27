@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pirate's Path — A Choose Your Own Adventure</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header class="site-header">
+    <h1>🏴‍☠️ Pirate's Path</h1>
+    <p class="tagline">Chart your fate across the Seven Seas</p>
+  </header>
+
+  <main>
+    <section class="game card" aria-live="polite">
+      <div class="image-wrap">
+        <img id="scene-image" src="" alt="Scene image" />
+      </div>
+
+      <div class="story">
+        <h2 id="scene-title"></h2>
+        <p id="scene-text"></p>
+      </div>
+
+      <div id="choices" class="choices" aria-label="Choices"></div>
+
+      <div class="controls">
+        <button id="restartBtn" class="btn ghost" aria-label="Restart the story">↺ Restart</button>
+      </div>
+    </section>
+
+    <section class="card addendum">
+      <details open>
+        <summary>📓 Addendum — Process & Choices</summary>
+        <div class="addendum-body">
+          <h3>Planning & Structure</h3>
+          <p>
+            I designed the story as a directed graph of <em>stages</em>, where each stage has text,
+            an image, and a set of choices that connect to the next stage via a key.
+            The <code>script.js</code> file keeps this data in a single JavaScript object named
+            <code>story</code>. A <code>render()</code> function updates the DOM with the current stage,
+            generating buttons with event listeners for each choice.
+          </p>
+
+          <h3>Debugging & Testing</h3>
+          <p>
+            I tested every branch to ensure all endings were reachable and each endpoint displayed
+            the correct image. I added basic input guards and simple fallbacks for missing images.
+            The UI uses clear hierarchy and large tap targets to minimize errors on mobile devices.
+          </p>
+
+          <h3>Design Decisions</h3>
+          <ul>
+            <li><strong>Colorful, simple theme:</strong> A friendly palette, soft card shadows, and plenty of whitespace for readability.</li>
+            <li><strong>Accessibility:</strong> Semantic landmarks, live region updates, and ALT text on images.</li>
+            <li><strong>Maintainability:</strong> Data‑driven scenes allow new chapters/endings to be added by editing one object.</li>
+          </ul>
+
+          <h3>Challenges & Resolutions</h3>
+          <ul>
+            <li><strong>Branch complexity:</strong> I mapped branches first, then encoded them as keys to avoid dead links.</li>
+            <li><strong>Image loading:</strong> I used high‑quality, hotlink‑friendly images with descriptive ALT text.</li>
+          </ul>
+
+          <h3>Insights Gained</h3>
+          <p>
+            Separating content (story data) from logic (render/update functions) makes iterative
+            development far easier. DOM manipulation with event listeners is a clean fit for
+            branching narratives.
+          </p>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <p>Last updated: 
+      <span id="lastModified"></span>
+    </p>
+  </footer>
+  <script type="text/javascript">
+    var x = document.lastModified;
+    document.getElementById('lastModified').textContent = x;
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
