@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ITC505 Lab 7 — Mad Lib</title>
+  <style>
+    :root { --gap: 12px; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, Arial, sans-serif;
+      margin: 0; padding: 0; background: #f7fafc; color: #111827;
+    }
+    header {
+      background: linear-gradient(135deg, #dbeafe, #fce7f3);
+      padding: 2rem 1rem; text-align: center;
+    }
+    header h1 { margin: 0; }
+    main {
+      max-width: 860px; margin: -24px auto 0; padding: 0 1rem 3rem;
+    }
+    .card {
+      background: #fff; border: 1px solid #e5e7eb; border-radius: 16px;
+      padding: 1.25rem; box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    }
+    form { display: grid; gap: var(--gap); }
+    label { font-weight: 600; }
+    input[type="text"], input[type="number"] {
+      width: 100%; padding: .65rem .75rem; border: 1px solid #d1d5db; border-radius: 10px;
+    }
+    button {
+      padding: .75rem 1rem; border: 1px solid #cbd5e1; background: #f1f5f9;
+      border-radius: 10px; cursor: pointer; font-weight: 600;
+    }
+    button:hover { filter: brightness(0.98); }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); }
+    @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+    footer { margin: 2rem auto 0; max-width: 860px; padding: 0 1rem 2rem; color: #475569; }
+    .addendum { margin-top: 2rem; background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 1rem; }
+    .addendum h2 { margin-top: 0; color: #1e293b; }
+    .addendum p { margin-bottom: .5rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ITC505 Lab 7 — Mad Lib</h1>
+    <p>Fill out the form and submit to see your story.</p>
+  </header>
+
+  <main>
+    <div class="card">
+      <form method="POST" action="/ITC505/lab-7/index.html" autocomplete="off" novalidate>
+        <div class="grid">
+          <div>
+            <label for="pluralNoun">Plural noun</label>
+            <input id="pluralNoun" name="pluralNoun" type="text" required placeholder="e.g., robots" />
+          </div>
+          <div>
+            <label for="adjective">Adjective</label>
+            <input id="adjective" name="adjective" type="text" required placeholder="e.g., sparkling" />
+          </div>
+        </div>
+
+        <div class="grid">
+          <div>
+            <label for="verbPast">Verb (past tense)</label>
+            <input id="verbPast" name="verbPast" type="text" required placeholder="e.g., danced" />
+          </div>
+          <div>
+            <label for="place">Place</label>
+            <input id="place" name="place" type="text" required placeholder="e.g., Flagstaff" />
+          </div>
+        </div>
+
+        <div class="grid">
+          <div>
+            <label for="number">Number</label>
+            <input id="number" name="number" type="number" min="0" step="1" required placeholder="e.g., 7" />
+          </div>
+          <div>
+            <label for="animal">Animal</label>
+            <input id="animal" name="animal" type="text" required placeholder="e.g., hummingbird" />
+          </div>
+        </div>
+
+        <button type="submit">Build My Story</button>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <p>Last updated:
+      <span id="lastModified"></span>
+    </p>
+
+    <div class="addendum">
+      <h2>Addendum: Explanation of Setup and Implementation</h2>
+
+      <h3>Overview</h3>
+      <p>This lab sets up an ExpressJS server to host web labs and a dynamic Mad Lib generator. It integrates Express, Morgan, and Forever for logging, management, and persistence.</p>
+
+      <h3>Server Configuration</h3>
+      <p>The server.js file imports modules, parses POST data, logs requests, serves static files, defines GET and POST routes, and handles port 8080 (local) or 80 (production).</p>
+
+      <h3>Frontend (Mad Lib Form Page)</h3>
+      <p>The form at /public/ITC505/lab-7/index.html posts to the same URL and includes six inputs (plural noun, adjective, verb, place, number, and animal) with HTML5 validation and a footer script.</p>
+
+      <h3>Mad Lib Logic</h3>
+      <p>On submission, the server validates input fields, constructs a story with string interpolation, and returns it dynamically as an HTML page.</p>
+
+      <h3>Testing and Verification</h3>
+      <p>Local testing was done using node server.js local, verified through /ITC505/lab-7/index.html and /do_a_random routes. Forever commands manage the server in production.</p>
+
+      <h3>Reflection</h3>
+      <p>This lab improved understanding of ExpressJS routing, handling POST/GET requests, and maintaining persistent deployments using Forever.</p>
+    </div>
+  </footer>
+
+  <script type="text/javascript">
+    var x = document.lastModified;
+    document.getElementById('lastModified').textContent = x;
+  </script>
+</body>
+</html>
