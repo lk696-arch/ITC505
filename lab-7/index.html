@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ITC505 Lab 7 — Mad Lib</title>
+  <title>ITC505 Lab 7 — Mad Lib (Client-Side with Addendum)</title>
   <style>
     :root { --gap: 12px; }
     * { box-sizing: border-box; }
@@ -35,6 +35,14 @@
     button:hover { filter: brightness(0.98); }
     .grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); }
     @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+    #story {
+      margin-top: 1.5rem;
+      background: #fff7ed;
+      border: 1px solid #fdba74;
+      border-radius: 10px;
+      padding: 1rem;
+      display: none;
+    }
     footer { margin: 2rem auto 0; max-width: 860px; padding: 0 1rem 2rem; color: #475569; }
     .addendum { margin-top: 2rem; background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 1rem; }
     .addendum h2 { margin-top: 0; color: #1e293b; }
@@ -43,13 +51,13 @@
 </head>
 <body>
   <header>
-    <h1>ITC505 Lab 7 — Mad Lib</h1>
-    <p>Fill out the form and submit to see your story.</p>
+    <h1>ITC505 Lab 7 — Mad Lib (Client-Side)</h1>
+    <p>Fill out the form and see your story appear below instantly!</p>
   </header>
 
   <main>
     <div class="card">
-      <form method="POST" action="/ITC505/lab-7/index.html" autocomplete="off" novalidate>
+      <form id="madLibForm">
         <div class="grid">
           <div>
             <label for="pluralNoun">Plural noun</label>
@@ -85,6 +93,8 @@
 
         <button type="submit">Build My Story</button>
       </form>
+
+      <div id="story"></div>
     </div>
   </main>
 
@@ -95,30 +105,49 @@
 
     <div class="addendum">
       <h2>Addendum: Explanation of Setup and Implementation</h2>
-
       <h3>Overview</h3>
-      <p>This lab sets up an ExpressJS server to host web labs and a dynamic Mad Lib generator. It integrates Express, Morgan, and Forever for logging, management, and persistence.</p>
+      <p>This lab demonstrates a client-side Mad Lib generator using JavaScript to process user inputs and dynamically display the story on the same page.</p>
 
-      <h3>Server Configuration</h3>
-      <p>The server.js file imports modules, parses POST data, logs requests, serves static files, defines GET and POST routes, and handles port 8080 (local) or 80 (production).</p>
+      <h3>Form Setup</h3>
+      <p>The form collects six user inputs (plural noun, adjective, verb, place, number, and animal) with HTML5 validation and placeholders for clarity.</p>
 
-      <h3>Frontend (Mad Lib Form Page)</h3>
-      <p>The form at /public/ITC505/lab-7/index.html posts to the same URL and includes six inputs (plural noun, adjective, verb, place, number, and animal) with HTML5 validation and a footer script.</p>
+      <h3>JavaScript Logic</h3>
+      <p>The JavaScript intercepts the form submission, constructs a creative story using string interpolation, and displays it below the form without page reload.</p>
 
-      <h3>Mad Lib Logic</h3>
-      <p>On submission, the server validates input fields, constructs a story with string interpolation, and returns it dynamically as an HTML page.</p>
+      <h3>Styling and Layout</h3>
+      <p>CSS grid and modern styling provide a clean, responsive layout. The story box appears with a highlighted background once the user submits valid input.</p>
 
-      <h3>Testing and Verification</h3>
-      <p>Local testing was done using node server.js local, verified through /ITC505/lab-7/index.html and /do_a_random routes. Forever commands manage the server in production.</p>
+      <h3>Footer and Script</h3>
+      <p>The footer includes the required lastModified script, ensuring compliance with the lab’s submission requirements and showing when the file was last updated.</p>
 
       <h3>Reflection</h3>
-      <p>This lab improved understanding of ExpressJS routing, handling POST/GET requests, and maintaining persistent deployments using Forever.</p>
+      <p>This project enhanced understanding of DOM manipulation, form validation, and dynamic HTML updates without server-side processing.</p>
     </div>
   </footer>
 
-  <script type="text/javascript">
-    var x = document.lastModified;
-    document.getElementById('lastModified').textContent = x;
+  <script>
+    document.getElementById('lastModified').textContent = document.lastModified;
+
+    document.getElementById('madLibForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const pluralNoun = document.getElementById('pluralNoun').value;
+      const adjective = document.getElementById('adjective').value;
+      const verbPast = document.getElementById('verbPast').value;
+      const place = document.getElementById('place').value;
+      const number = document.getElementById('number').value;
+      const animal = document.getElementById('animal').value;
+
+      const story = `
+        Once upon a time in ${place}, a group of ${pluralNoun} ${verbPast} through a ${adjective} market. 
+        After exactly ${number} minutes, a tiny ${animal} leapt from a cart and declared, 
+        “This story is now complete!” Everyone cheered and promised never to forget the ${adjective} lesson.
+      `;
+
+      const storyBox = document.getElementById('story');
+      storyBox.style.display = 'block';
+      storyBox.innerHTML = `<h2>Your Story</h2><p>${story}</p>`;
+    });
   </script>
 </body>
 </html>
