@@ -1,0 +1,15 @@
+{
+  "name": "itc505-lab7",
+  "version": "1.0.0",
+  "description": "ITC505 Lab 7 ExpressJS Mad Lib project with Addendum footer",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js local"
+  },
+  "author": "Leela Madhav Kesana",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "morgan": "^1.10.0"
+  }
+}
