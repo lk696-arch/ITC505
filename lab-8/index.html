@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lab 8 — Secure Form</title>
+  <style>
+    body { font-family: Arial; margin: 40px; }
+    form { max-width: 450px; border: 1px solid #ddd; padding: 20px; border-radius: 10px; }
+    label { display: block; margin-top: 12px; }
+    input { width: 100%; padding: 8px; margin-top: 5px; }
+    button { margin-top: 15px; padding: 10px; width: 100%; background: #0077cc; color: white; border: none; }
+    .error { color: red; margin-top: 5px; }
+  </style>
+
+  <script>
+    // Secure sanitization function to prevent reflected XSS
+    function sanitize(input) {
+      return input.replace(/</g, "&lt;").replace(/>/g, "&gt;")
+                  .replace(/"/g, "&quot;").replace(/'/g, "&#x27;");
+    }
+
+    function validateForm(event) {
+      event.preventDefault();
+
+      let firstname = sanitize(document.getElementById("fname").value.trim());
+      let lastname = sanitize(document.getElementById("lname").value.trim());
+      let email = sanitize(document.getElementById("email").value.trim());
+      let password = document.getElementById("password").value;
+      let confirmPass = document.getElementById("confirm").value;
+
+      let errorMsg = "";
+
+      // Empty fields
+      if (!firstname || !lastname || !email || !password || !confirmPass) {
+        errorMsg += "All fields are required.<br>";
+      }
+
+      // Email format
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email)) {
+        errorMsg += "Invalid email format.<br>";
+      }
+
+      // Password match
+      if (password !== confirmPass) {
+        errorMsg += "Passwords do not match.<br>";
+      }
+
+      // Display errors
+      document.getElementById("error").innerHTML = errorMsg;
+
+      // If no errors, success
+      if (errorMsg === "") {
+        alert("Form submitted securely!");
+        document.getElementById("secureForm").reset();
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <h2>Secure Registration Form</h2>
+  <form id="secureForm" onsubmit="validateForm(event)">
+    <label>First Name</label>
+    <input type="text" id="fname">
+
+    <label>Last Name</label>
+    <input type="text" id="lname">
+
+    <label>Email</label>
+    <input type="email" id="email">
+
+    <label>Password</label>
+    <input type="password" id="password">
+
+    <label>Confirm Password</label>
+    <input type="password" id="confirm">
+
+    <div id="error" class="error"></div>
+
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
