@@ -366,11 +366,10 @@
                 the move counter while the board was randomizing. I fixed this by creating a helper
                 that applies the same neighbor-toggling pattern without touching the move counter.
                 Another challenge was making sure I correctly checked the win state: I solved that by
-                scanning the state array and confirming that every entry is <code>false</code> (all
-                lights off). Overall, this project helped reinforce how DOM events, data attributes,
-                arrays, and CSS classes work together to build an interactive JavaScript application,
-                and how a simple hint about “simulating clicks” can guide you to a clean and
-                mathematically sound randomization strategy.
+                confirming there are no remaining “on” tiles in the DOM. Overall, this project helped
+                reinforce how DOM events, data attributes, arrays, and CSS classes work together to
+                build an interactive JavaScript application, and how a simple hint about “simulating
+                clicks” can guide you to a clean and mathematically sound randomization strategy.
             </p>
         </section>
     </main>
@@ -460,16 +459,11 @@
                 toggleCell(row, col + 1);
             }
 
+            // UPDATED: checkWin uses the DOM to count ON cells
             function checkWin() {
-                for (let row = 0; row < BOARD_SIZE; row++) {
-                    for (let col = 0; col < BOARD_SIZE; col++) {
-                        if (boardState[row][col]) {
-                            // still at least one light ON
-                            return false;
-                        }
-                    }
-                }
-                return true;
+                // Any cell that is NOT "is-off" is still ON (yellow)
+                const onCells = boardEl.querySelectorAll('.cell:not(.is-off)').length;
+                return onCells === 0;
             }
 
             function randomizeBoard() {
