@@ -2,442 +2,137 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Revenge of Lights Out – ITC 505 Final</title>
+    <title>Lights Out – Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Fun fonts (font-craziness) served from Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet"/>
 
     <style>
-        :root {
-            --bg-color: #050816;
-            --panel-color: rgba(9, 9, 33, 0.95);
-            --accent: #ffcc00;
-            --accent-soft: rgba(255, 204, 0, 0.1);
-            --light-on: #ffe066;
-            --light-off: #11131f;
-            --light-border: #343a40;
-            --danger: #ff7b7b;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
         body {
             margin: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
             padding: 1.5rem;
-            background: radial-gradient(circle at top, #343a40 0, #050816 55%, #02040a 100%);
-            color: #f8f9fa;
-            font-family: 'Quicksand', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        }
-
-        header {
             text-align: center;
-            margin-bottom: 1.5rem;
+            background: #0a0f24;
+            color: white;
+            font-family: 'Quicksand', sans-serif;
         }
 
         h1 {
-            font-family: 'Press Start 2P', system-ui, sans-serif;
-            font-size: clamp(1.4rem, 1.2rem + 1vw, 1.8rem);
-            line-height: 1.4;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            text-shadow: 0 0 8px rgba(0,0,0,0.7), 0 0 16px rgba(255,255,255,0.25);
-            margin: 0 0 0.5rem;
-        }
-
-        .subtitle {
-            font-size: 0.9rem;
-            opacity: 0.85;
-        }
-
-        main {
-            width: 100%;
-            max-width: 960px;
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .game-panel {
-            background: var(--panel-color);
-            border-radius: 18px;
-            padding: 1.5rem;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.55);
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .game-header-row {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.75rem;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.4rem;
             margin-bottom: 1rem;
         }
 
-        .game-title {
-            font-weight: 700;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            font-size: 0.95rem;
-        }
-
-        .controls {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-        }
-
-        button {
-            border: none;
-            cursor: pointer;
-            font-family: inherit;
-        }
-
-        #newGameBtn {
-            padding: 0.45rem 0.9rem;
-            border-radius: 999px;
-            background: linear-gradient(135deg, #ffcc00, #ff9f1c);
-            color: #111;
-            font-weight: 700;
-            font-size: 0.8rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.45);
-            transition: transform 0.08s ease-out, box-shadow 0.08s ease-out, filter 0.08s ease-out;
-        }
-
-        #newGameBtn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.55);
-            filter: brightness(1.05);
-        }
-
-        #newGameBtn:active {
-            transform: translateY(1px) scale(0.98);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-        }
-
-        .counter {
-            padding: 0.3rem 0.75rem;
-            border-radius: 999px;
-            background: var(--accent-soft);
-            border: 1px solid rgba(255, 204, 0, 0.45);
-            font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-        }
-
-        .counter-label {
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            font-size: 0.7rem;
-            opacity: 0.8;
-        }
-
-        .counter-value {
-            font-weight: 700;
-            font-feature-settings: "tnum";
-        }
-
-        .board-wrapper {
-            display: flex;
-            justify-content: center;
-            margin: 1rem 0;
-        }
-
-        .board {
+        #board {
             display: grid;
-            grid-template-columns: repeat(5, minmax(40px, 60px));
-            grid-auto-rows: minmax(40px, 60px);
-            gap: 0.35rem;
-            padding: 0.5rem;
-            border-radius: 16px;
-            background: radial-gradient(circle at top, rgba(255,255,255,0.12), rgba(0,0,0,0.7));
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+            grid-template-columns: repeat(5, 60px);
+            gap: 6px;
+            justify-content: center;
+            margin-top: 20px;
         }
 
         .cell {
-            width: 100%;
-            height: 100%;
-            border-radius: 12px;
-            background: var(--light-on);
-            border: 1px solid var(--light-border);
-            box-shadow:
-                0 3px 6px rgba(0,0,0,0.45),
-                0 0 12px rgba(255,255,255,0.3);
-            transition:
-                background 0.12s ease-out,
-                transform 0.06s ease-out,
-                box-shadow 0.1s ease-out,
-                filter 0.12s ease-out;
-        }
-
-        .cell:hover {
-            transform: translateY(-1px);
-            filter: brightness(1.1);
-        }
-
-        .cell:active {
-            transform: translateY(1px) scale(0.98);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.6);
-        }
-
-        /* Off cells are "dark" */
-        .cell.is-off {
-            background: var(--light-off);
-            box-shadow:
-                inset 0 0 12px rgba(0,0,0,0.9),
-                0 0 8px rgba(0,0,0,0.8);
-            border-color: #0b1021;
-        }
-
-        .game-instructions {
-            font-size: 0.9rem;
-            line-height: 1.6;
-            margin-top: 0.75rem;
-            background: rgba(0,0,0,0.25);
-            border-left: 3px solid var(--accent);
-            padding: 0.75rem 0.9rem;
+            width: 60px;
+            height: 60px;
             border-radius: 10px;
+            background: #ffe066;
+            cursor: pointer;
+            transition: 0.2s;
         }
 
-        .game-instructions strong {
-            font-weight: 700;
+        .cell.is-off {
+            background: #11131f;
         }
 
-        .note {
-            margin-top: 0.35rem;
-            font-size: 0.8rem;
-            opacity: 0.85;
-        }
-
-        .addendum {
-            background: rgba(2, 6, 23, 0.92);
-            border-radius: 18px;
-            padding: 1.5rem;
-            border: 1px solid rgba(255,255,255,0.05);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.6);
-        }
-
-        .addendum h2 {
-            font-family: 'Press Start 2P', system-ui, sans-serif;
-            font-size: 0.95rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            margin-top: 0;
-            margin-bottom: 0.75rem;
-        }
-
-        .addendum p {
-            font-size: 0.9rem;
-            line-height: 1.7;
-            margin: 0.5rem 0;
-        }
-
-        .addendum em {
-            color: var(--accent);
-            font-style: normal;
-            font-weight: 600;
-        }
-
-        footer {
-            margin-top: 1.5rem;
-            font-size: 0.7rem;
-            opacity: 0.8;
-        }
-
-        footer p {
-            margin: 0;
-        }
-
-        @media (max-width: 600px) {
-            body {
-                padding: 1rem 0.5rem;
-            }
-
-            .board {
-                grid-template-columns: repeat(5, minmax(36px, 1fr));
-                grid-auto-rows: minmax(36px, 1fr);
-            }
-
-            .game-header-row {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .controls {
-                width: 100%;
-                justify-content: space-between;
-            }
+        #newGameBtn {
+            margin-top: 15px;
+            padding: 10px 20px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+            background: gold;
+            color: #111;
         }
     </style>
 </head>
+
 <body>
-    <header>
-        <h1>Revenge of Lights Out</h1>
-        <p class="subtitle">ITC 505 &mdash; JavaScript Final Project</p>
-    </header>
+    <h1>Lights Out – Play Now</h1>
 
-    <main>
-        <!-- GAME PANEL -->
-        <section class="game-panel" aria-label="Lights Out game">
-            <div class="game-header-row">
-                <div class="game-title">Turn out all the lights!</div>
+    <div id="board"></div>
 
-                <div class="controls">
-                    <button id="newGameBtn" type="button">New Game</button>
-                    <div class="counter" aria-label="Move counter">
-                        <span class="counter-label">Moves</span>
-                        <span class="counter-value" id="moveCounter">0</span>
-                    </div>
-                </div>
-            </div>
+    <button id="newGameBtn">New Game</button>
 
-            <div class="board-wrapper">
-                <div id="board" class="board" aria-label="Lights Out board"></div>
-            </div>
+    <script>
+        const SIZE = 5;
+        let boardState = [];
 
-            <div class="game-instructions">
-                <strong>How to play:</strong> Click any square to toggle its light and the lights
-                directly <em>above, below, left, and right</em> of it. The goal of the puzzle is to turn
-                <em>all</em> the lights off (every square dark).
-                <p class="note">
-                    Each time the page loads or you click <strong>New Game</strong>, a new
-                    randomly generated but solvable board is created by simulating random legal moves
-                    from an all-off starting state.
-                </p>
-            </div>
-        </section>
+        const board = document.getElementById("board");
+        const newGameBtn = document.getElementById("newGameBtn");
 
-        <!-- ADDENDUM / PROCESS WRITE-UP (for rubric) -->
-        <section class="addendum">
-            <h2>Addendum: Design, Process, and Challenges</h2>
+        function createBoard() {
+            board.innerHTML = "";
+            boardState = [];
 
-            <p>
-                My implementation of <em>Revenge of Lights Out</em> is built around a dynamic
-                JavaScript-generated 5x5 grid. Each square is a button element with a
-                <code>data-row</code> and <code>data-col</code> attribute so that the game logic can
-                easily translate user clicks into board coordinates. The game state is stored in a
-                two-dimensional JavaScript array of booleans, where <code>true</code> represents a
-                light that is on and <code>false</code> represents a light that is off. When the user
-                clicks a square, the code toggles that square and its orthogonal neighbors using a
-                single <code>makeMove()</code> function, which keeps the logic clear and easy to extend.
-            </p>
+            for (let r = 0; r < SIZE; r++) {
+                boardState.push([]);
+                for (let c = 0; c < SIZE; c++) {
+                    boardState[r].push(false);
 
-            <p>
-                To satisfy the requirement that the starting configuration is random but solvable,
-                I start from an all-off board and then simulate a series of random legitimate moves.
-                Because every board state is just a combination of valid moves from the all-off
-                configuration, the final pattern must be solvable by reversing some sequence of
-                moves. A move counter tracks how many clicks the player uses, and after each move the
-                game checks whether all entries in the state array are <code>false</code>; if so, a
-                popup appears with <code>window.alert("You win!")</code> and the game automatically
-                starts a fresh randomized puzzle. This matches the classic Lights Out rule of “turn
-                off all the lights” and gives immediate feedback when the puzzle is solved.
-            </p>
+                    let cell = document.createElement("div");
+                    cell.classList.add("cell", "is-off");
+                    cell.dataset.row = r;
+                    cell.dataset.col = c;
 
-            <p>
-                Visually, I leaned into the “revenge” theme with a dark, neon-inspired aesthetic.
-                The overall page uses the <em>Quicksand</em> font for body text and the retro
-                <em>Press Start 2P</em> font for the main title and addendum heading. Both fonts are
-                served through Google Fonts using the standard
-                <code>&lt;link&gt;</code>-based approach in the document <code>&lt;head&gt;</code>, which
-                satisfies the lab’s “font-craziness” requirement. The board uses CSS Grid to keep the
-                layout responsive, and CSS transitions provide smooth changes between the bright
-                “on” state and the dark “off” state. One challenge I ran into was keeping the logic
-                and styling separated: the solution was to have JavaScript only toggle an
-                <code>is-off</code> class on each square and let CSS handle colors, shadows, and
-                hover effects. This made it much easier to tweak the visual design after the core
-                game logic was finished.
-            </p>
+                    cell.addEventListener("click", () => makeMove(r, c));
 
-            <p>
-                Overall, this project reinforced how event listeners, data attributes, and arrays can
-                work together to manage interactive state on a web page. It also showed how a simple
-                rule set (toggling neighbors) can still produce interesting and challenging puzzles
-                when combined with randomness and clean UI feedback.
-            </p>
-        </section>
-    </main>
-
-    <!-- GAME SCRIPT -->
-    <script type="text/javascript">
-        (function () {
-            const BOARD_SIZE = 5;
-            let boardState = [];
-            let moveCount = 0;
-
-            const boardEl = document.getElementById('board');
-            const moveCounterEl = document.getElementById('moveCounter');
-            const newGameBtn = document.getElementById('newGameBtn');
-
-            function createEmptyBoard() {
-                boardState = [];
-                boardEl.innerHTML = '';
-
-                for (let row = 0; row < BOARD_SIZE; row++) {
-                    const rowArr = [];
-                    for (let col = 0; col < BOARD_SIZE; col++) {
-                        // start with all lights OFF (false)
-                        rowArr.push(false);
-
-                        const cell = document.createElement('button');
-                        cell.classList.add('cell', 'is-off');
-                        cell.setAttribute('data-row', String(row));
-                        cell.setAttribute('data-col', String(col));
-                        cell.setAttribute('aria-label', 'Grid cell ' + (row + 1) + ',' + (col + 1));
-                        cell.type = 'button';
-
-                        cell.addEventListener('click', function () {
-                            makeMove(row, col);
-                        });
-
-                        boardEl.appendChild(cell);
-                    }
-                    boardState.push(rowArr);
+                    board.appendChild(cell);
                 }
             }
+        }
 
-            function getCellElement(row, col) {
-                return boardEl.querySelector(
-                    '.cell[data-row="' + row + '"][data-col="' + col + '"]'
-                );
+        function toggle(r, c) {
+            if (r < 0 || r >= SIZE || c < 0 || c >= SIZE) return;
+
+            boardState[r][c] = !boardState[r][c];
+            const el = board.querySelector(`[data-row="${r}"][data-col="${c}"]`);
+            el.classList.toggle("is-off", !boardState[r][c]);
+        }
+
+        function makeMove(r, c) {
+            toggle(r, c);
+            toggle(r - 1, c);
+            toggle(r + 1, c);
+            toggle(r, c - 1);
+            toggle(r, c + 1);
+
+            if (checkWin()) {
+                setTimeout(() => alert("You Win!"), 100);
             }
+        }
 
-            function toggleCell(row, col) {
-                if (row < 0 || row >= BOARD_SIZE || col < 0 || col >= BOARD_SIZE) {
-                    return; // out of bounds
-                }
-                boardState[row][col] = !boardState[row][col];
+        function checkWin() {
+            return boardState.flat().every(x => x === false);
+        }
 
-                const cellEl = getCellElement(row, col);
-                if (!cellEl) return;
-
-                const isOn = boardState[row][col];
-                // if not on, then it's off -> add is-off class
-                cellEl.classList.toggle('is-off', !isOn);
+        function randomizeBoard() {
+            for (let i = 0; i < SIZE * SIZE * 2; i++) {
+                const r = Math.floor(Math.random() * SIZE);
+                const c = Math.floor(Math.random() * SIZE);
+                makeMove(r, c);
             }
+        }
 
-            function makeMove(row, col) {
-                // clicked cell + orthogonal neighbors
-                toggleCell(row, col);
-                toggleCell(row - 1, col);
-                toggleCell(row + 1, col);
-                toggleCell(row, col - 1);
-                toggleCell(row, col + 1);
+        function newGame() {
+            createBoard();
+            randomizeBoard();
+        }
 
-                moveCount++;
-                moveCounterEl.textContent = String(moveCount);
+        newGameBtn.addEventListener("click", newGame);
 
-                if (checkWin()) {
+        newGame();
+    </script>
+</body>
+</html>
